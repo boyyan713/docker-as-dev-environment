@@ -2,7 +2,7 @@ FROM spacemacs/emacs25:develop
 
 MAINTAINER Boyang Yan <boyyan@microsoft.com>
 
-ENV UNAME="yanboyang713"
+#ENV UNAME="yanboyang713"
 
 ENV CHROME_KEY="https://dl-ssl.google.com/linux/linux_signing_key.pub" \
     CHROME_REP="deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"

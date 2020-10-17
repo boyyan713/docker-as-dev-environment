@@ -1,5 +1,22 @@
 version: '3'
 services:
+  spacemacs:
+    env_file:
+      - ./spacemacs/environment.env
+    build: ./spacemacs
+    environment:
+      - DISPLAY=$DISPLAY
+      - TZ=CN
+      - UNAME=spacemacser
+      - UHOME=/home/emacs
+    volumes:
+      - ./:/mnt/workspace
+      - /etc/localtime:/etc/localtime:ro
+      - ~/.ssh/id_rsa:${UHOME}/.ssh/id_rsa:ro
+      - ~/.gnupg:${UHOME}/.gnupg
+      - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /etc/machine-id:/etc/machine-id:ro
   njs1:
     build: ./njs1
     command: sh -c "npm install && npm start"
