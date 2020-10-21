@@ -1,15 +1,19 @@
 FROM spacemacs/emacs25:develop
+#FROM spacemacs/emacs-snapshot:develop
 
-MAINTAINER Boyang Yan <boyyan@microsoft.com>
+MAINTAINER JAremko <w3techplaygound@gmail.com>
 
-#ENV UNAME="yanboyang713"
+ENV UNAME="jare"
 
 ENV CHROME_KEY="https://dl-ssl.google.com/linux/linux_signing_key.pub" \
     CHROME_REP="deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main"
 
+USER root
+
 RUN apt-get update \
     && apt-get install \
     curl \
+    apt-utils \
     gcc \
     python \
     rlwrap \
@@ -26,7 +30,8 @@ RUN apt-get update \
     --no-sandbox \
     https://example.org/
 
-COPY .spacemacs "${UHOME}/.spacemacs"
+COPY spacemacs-private "${UHOME}/.spacemacs.d/"
+#COPY .spacemacs "${UHOME}/.spacemacs"
 COPY private "${UHOME}/.emacs.d/private"
 COPY .lein "${UHOME}/.lein"
 
@@ -56,3 +61,4 @@ RUN echo "(defproject stub \"0.0.1-SNAPSHOT\")" > /tmp/project.clj \
     && lein deps \
     && rm -rf /tmp/*
 USER root
+
